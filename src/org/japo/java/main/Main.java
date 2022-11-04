@@ -15,39 +15,48 @@
  */
 package org.japo.java.main;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-//import java.util.Scanner;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
-        // Instancia un objeto Scanner
-//        Scanner sc = new Scanner(System.in);
-        
-        // Introduce el año a analizar
-//        System.out.print("Introduzca año: ");
-//        int any = sc.nextInt();
-        
-        // Acceso al calendario del sistema
-        GregorianCalendar gc = new GregorianCalendar();
-        
-        // Variables
-        String decision;
-        int any = gc.get(Calendar.YEAR);
+    // Instancia el objeto Scanner
+    public static final Scanner SCN
+            = new Scanner(System.in, "Windows-1252")
+                    .useLocale(Locale.ENGLISH).useDelimiter("\\s+");
 
-        // Analiza el año
-        if (any % 400 == 0) {
-            decision = "SI";
-        } else if (any % 100 == 0) {
-            decision = "NO";
-        } else if (any % 4 == 0) {
-            decision = "SI";
-        } else {
-            decision = "NO";
+    public static void main(String[] args) {
+
+        // Cabecera
+        System.out.println("Alternativa Bisiesta");
+        System.out.println("====================");
+
+        try {
+            // Introduce el año a analizar
+            System.out.print("Análisis año ...: ");
+            int any = SCN.nextInt();
+
+            // Separador
+            System.out.println("---");
+            
+            // Variables
+            String decision;
+
+            // Analiza el año
+            if (any % 400 == 0) {
+                decision = "SI";
+            } else if (any % 100 == 0) {
+                decision = "NO";
+            } else if (any % 4 == 0) {
+                decision = "SI";
+            } else {
+                decision = "NO";
+            }
+
+            // Mensaje Resultado
+            System.out.printf("El año %d ....: %s es bisiesto%n", any, decision);
+        } catch (Exception e) {
+            System.out.println("ERROR: Entrada incorrecta");
         }
-        
-        // Mensaje Resultado
-        System.out.printf("El año %d %s es bisiesto\n", any, decision);
     }
 }
